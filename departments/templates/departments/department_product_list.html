@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Категории и товары</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Категории и товары</h1>
+        <a href="{% url 'department_list' %}" class="btn btn-primary">Перейти в список отделов для их редакции и наполнения</a>
+        <ul class="list-group mt-3">
+            {% for department in departments %}
+                <li class="list-group-item">
+                    <h5>{{ department.name }}</h5>
+                    <p>{{ department.description }}</p>
+                    <h6>Товары:</h6>
+                    <ul>
+                        {% for product in department.products.all %}
+                            <li>{{ product.name }} - {{ product.price }}₽</li>
+                        {% empty %}
+                            <li>Нет товаров в этом отделе.</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
